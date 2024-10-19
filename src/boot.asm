@@ -1,6 +1,7 @@
 BITS 32
 align 4
 
+section .text
 multiboot_header:
     dd 0x1BADB002
     dd 0x0

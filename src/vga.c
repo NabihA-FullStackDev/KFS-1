@@ -3,18 +3,28 @@
 uint16_t column = 0;
 uint16_t line = 0;
 uint16_t *const vga = (uint16_t *const) 0xB8000;
-const uint16_t defaultColor = (TXT_COLOR << 8) | (BG_COLOR << 12);
+const uint16_t defaultColor = (DFT_TXT_COLOR << 8) | (DFT_BG_COLOR << 12);
 uint16_t currentColor = defaultColor;
 
 void reset_screen()
 {
+    char c = ' ';
+
     line = 0;
     column = 0;
-    currentColor = defaultColor;
 
-    for (uint16_t y = 0; y < HEIGHT; y++)
-        for (uint16_t x = 0; x < WIDTH; x++)
-            vga[y * WIDTH + x] = ' ' | defaultColor;
+    while (line < HEIGHT)
+    {
+        column = 0;
+        while (column < WIDTH)
+        {
+            printc(&c, defaultColor);
+            column++;
+        }
+        line++;
+    }
+    line = 0;
+    column = 0;
 }
 
 void new_line()
@@ -27,10 +37,14 @@ void new_line()
     }
     else
         line++;
-
 }
 
-void print(const char *s)
+void printc(const char *c, uint16_t color)
+{
+    vga[line * WIDTH + column] = *c | color;
+}
+
+void prints(const char *s)
 {
     while (*s)
     {
@@ -42,7 +56,10 @@ void print(const char *s)
             line = 0;
         }
         else
-            vga[line * WIDTH + (column++)] = *s | currentColor;
+        {
+            printc(s, currentColor);
+            column++;
+        }
         s++;
     }
 }

@@ -3,13 +3,20 @@
 
 #include "stdint.h"
 
-#define BG_COLOR    0
-#define TXT_COLOR   10
+#define BLACK       0
+#define BLUE        3
+#define RED         4
+#define GREEN       10
+#define WHITE       15
+
+#define DFT_BG_COLOR BLACK
+#define DFT_TXT_COLOR WHITE
 
 #define WIDTH       80
 #define HEIGHT      25
 
-void print(const char *s);
+void printc(const char *c, const uint16_t color);
+void prints(const char *s);
 void reset_screen(void);
 void new_line();
 
