@@ -1,14 +1,14 @@
 # KFS-1
 
-KFS-1 est un projet visant à développer un système d'exploitation minimaliste pour l'architecture x86.
+KFS-1 est un projet visant à développer un système d'exploitation minimaliste pour l'architecture x86 (32 bits).
 
 ## Objectif
 
-Dans cette étape du projet, nous mettons en place le support du multiboot via GRUB et affichons un message à l'écran.
+Cette étape du projet consiste à mettre en place le support du multiboot via GRUB et à afficher un message simple à l'écran après le démarrage.
 
 ## Prérequis
 
-Pour exécuter ce projet sur une machine virtuelle Debian, les outils et bibliothèques suivants doivent être installés :
+Ce projet doit être exécuté dans une machine virtuelle Debian avec un environnement graphique GNOME. Les outils et bibliothèques suivants sont requis pour compiler et exécuter le système d'exploitation :
 
 - `gcc`
 - `nasm`
@@ -22,28 +22,28 @@ Pour exécuter ce projet sur une machine virtuelle Debian, les outils et bibliot
 ## Installation
 
 1. **Mise à jour du système et installation des dépendances** :  
-   Exécutez le script `install.sh` pour installer toutes les dépendances nécessaires :
+   Pour installer toutes les dépendances nécessaires, exécutez le script `install.sh` fourni :
    ```bash
    ./install.sh
    ```
 
 2. **Compilation du projet** :  
-   Utilisez `make` pour compiler le projet :
+   Une fois les dépendances installées, compilez le projet à l'aide de la commande `make` :
    ```bash
    make
    ```
 
-3. **Lancer le système dans QEMU** :  
-   Une fois la compilation terminée, démarrez le système d'exploitation généré en utilisant QEMU :
+3. **Exécution du système via QEMU** :  
+   Après la compilation, lancez le système d'exploitation dans l'émulateur QEMU avec la commande suivante :
    ```bash
    qemu-system-i386 -cdrom KFS.iso
    ```
 
 ## Fonctionnalités
 
-- **Support du multiboot via GRUB** : Le système d'exploitation est configuré pour être lancé via GRUB en utilisant le standard multiboot.
-- **Affichage d'un message à l'écran** : Après le chargement du noyau, un message est affiché à l'écran pour confirmer le bon démarrage du système.
+- **Support du multiboot via GRUB** : Le système d'exploitation est conçu pour être compatible avec le standard multiboot, permettant un démarrage via GRUB.
+- **Affichage d'un message à l'écran** : Une fois le noyau chargé, un message s'affiche à l'écran pour indiquer le bon déroulement du démarrage.
 
-## License
+## Licence
 
-Ce projet est sous licence MIT. Consultez le fichier `LICENSE` pour plus d'informations.
+Ce projet est distribué sous la licence MIT. Veuillez consulter le fichier `LICENSE` pour plus de détails.
