@@ -3,6 +3,9 @@
 
 #include "stdint.h"
 
+#define WIDTH       80
+#define HEIGHT      25
+
 #define BLACK       0
 #define BLUE        3
 #define RED         4
@@ -12,12 +15,10 @@
 #define DFT_BG_COLOR BLACK
 #define DFT_TXT_COLOR WHITE
 
-#define WIDTH       80
-#define HEIGHT      25
-
 void printc(const char *c, const uint16_t color);
 void prints(const char *s);
 void reset_screen(void);
-void new_line();
+void new_line(void);
+void scroll_screen(void);
 
 #endif

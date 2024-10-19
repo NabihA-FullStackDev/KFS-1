@@ -27,16 +27,22 @@ void reset_screen()
     column = 0;
 }
 
+void scroll_screen()
+{
+    for (uint16_t y = 0; y < HEIGHT; y++)
+        for (uint16_t x = 0; x <= WIDTH ; x++)
+            vga[y * WIDTH + x] = vga[(y + 1) * WIDTH + x];
+    for (uint16_t x = 0; x <= WIDTH; x++)
+        vga[(HEIGHT - 1) * WIDTH + x] = ' ' | currentColor;
+}
+
 void new_line()
 {
-    column = 0;
-    if (line >= HEIGHT)
-    {
-        reset_screen();
-        line = 0;
-    }
+    if (line >= HEIGHT - 1)
+        scroll_screen();
     else
         line++;
+    column = 0;
 }
 
 void printc(const char *c, uint16_t color)
@@ -50,11 +56,6 @@ void prints(const char *s)
     {
         if (column >= WIDTH || *s == '\n')
             new_line();
-        else if (line >= HEIGHT)
-        {
-            reset_screen();
-            line = 0;
-        }
         else
         {
             printc(s, currentColor);
