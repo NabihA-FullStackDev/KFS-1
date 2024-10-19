@@ -20,5 +20,14 @@ void prints(const char *s);
 void reset_screen(void);
 void new_line(void);
 void scroll_screen(void);
+void change_colors(uint16_t txt, uint16_t bg);
+
+typedef struct vga_s {
+    uint16_t column;
+    uint16_t line;
+    uint16_t *vga;
+    uint16_t default_color;
+    uint16_t current_color;
+} vga_t;
 
 #endif

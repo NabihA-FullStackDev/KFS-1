@@ -5,9 +5,9 @@ align 4
 ; Multiboot header pour GRUB avec identifiant, flags et checksum
 section .text
 multiboot_header:
-    dd 0x1BADB002
-    dd 0x0
-    dd -(0x1BADB002 + 0x0)
+    DD 0x1BADB002
+    DD 0x0
+    DD -(0x1BADB002 + 0x0)
 
 ; Point d'entrée global, kernel_main est défini ailleurs
 global start

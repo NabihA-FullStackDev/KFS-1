@@ -1,65 +1,77 @@
 #include "includes/vga.h"
 
-uint16_t column = 0;
-uint16_t line = 0;
-uint16_t *const vga = (uint16_t *const) 0xB8000;
-const uint16_t defaultColor = (DFT_TXT_COLOR << 8) | (DFT_BG_COLOR << 12);
-uint16_t currentColor = defaultColor;
+vga_t vga_state = {
+    .column = 0,
+    .line = 0,
+    .vga = (uint16_t *const) 0xB8000,
+    .default_color = (DFT_TXT_COLOR << 8) | (DFT_BG_COLOR << 12),
+    .current_color = (DFT_TXT_COLOR << 8) | (DFT_BG_COLOR << 12)
+};
+
+void change_colors(uint16_t txt, uint16_t bg)
+{
+    if (!(txt < 0 || txt > 16 || bg < 0 || bg > 16) && (txt != bg))
+    {
+        uint16_t color = (txt << 8) | (bg << 12);
+        vga_state.current_color = color;
+    }
+}
 
 void reset_screen()
 {
     char c = ' ';
 
-    line = 0;
-    column = 0;
+    vga_state.line = 0;
+    vga_state.column = 0;
 
-    while (line < HEIGHT)
+    while (vga_state.line < HEIGHT)
     {
-        column = 0;
-        while (column < WIDTH)
+        vga_state.column = 0;
+        while (vga_state.column <= WIDTH)
         {
-            printc(&c, defaultColor);
-            column++;
+            printc(&c, vga_state.default_color);
+            vga_state.column++;
         }
-        line++;
+        vga_state.line++;
     }
-    line = 0;
-    column = 0;
+    vga_state.line = 0;
+    vga_state.column = 0;
 }
 
 void scroll_screen()
 {
     for (uint16_t y = 0; y < HEIGHT; y++)
         for (uint16_t x = 0; x <= WIDTH ; x++)
-            vga[y * WIDTH + x] = vga[(y + 1) * WIDTH + x];
+            vga_state.vga[y * WIDTH + x] = vga_state.vga[(y + 1) * WIDTH + x];
+
     for (uint16_t x = 0; x <= WIDTH; x++)
-        vga[(HEIGHT - 1) * WIDTH + x] = ' ' | currentColor;
+        vga_state.vga[(HEIGHT - 1) * WIDTH + x] = ' ' | vga_state.current_color;
 }
 
 void new_line()
 {
-    if (line >= HEIGHT - 1)
+    if (vga_state.line >= HEIGHT - 1)
         scroll_screen();
     else
-        line++;
-    column = 0;
+        vga_state.line++;
+    vga_state.column = 0;
 }
 
 void printc(const char *c, uint16_t color)
 {
-    vga[line * WIDTH + column] = *c | color;
+    vga_state.vga[vga_state.line * WIDTH + vga_state.column] = *c | color;
 }
 
 void prints(const char *s)
 {
     while (*s)
     {
-        if (column >= WIDTH || *s == '\n')
+        if (vga_state.column >= WIDTH || *s == '\n')
             new_line();
         else
         {
-            printc(s, currentColor);
-            column++;
+            printc(s, vga_state.current_color);
+            vga_state.column++;
         }
         s++;
     }
