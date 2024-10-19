@@ -10,6 +10,7 @@
 #define HEIGHT      25
 
 void print(const char *s);
-void resetScreen(void);
+void reset_screen(void);
+void new_line();
 
 #endif

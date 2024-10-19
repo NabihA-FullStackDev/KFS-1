@@ -3,6 +3,17 @@
 void kernel_main(void);
 
 void kernel_main(void) {
-    resetScreen();
-    print("42");
+    reset_screen();
+    print("\n");
+    print("                           :::       ::::::::\n");
+    print("                         :+:       :+:    :+:\n");
+    print("                       +:+ +:+          +:+\n");
+    print("                     +#+  +:+         +#+\n");
+    print("                   +#+#+#+#+#+      +#+\n");
+    print("                         #+#       #+#\n");
+    print("                        ###      ##########\n");
+    print("          ----------------------------------------------          ");
+    print("\n");
+    print("\n");
+    print("User$> ");
 }
