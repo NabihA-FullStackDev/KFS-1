@@ -16,7 +16,7 @@
 #define DFT_TXT_COLOR WHITE
 
 void printc(const char *c, const uint16_t color);
-void printc_att(const char *c, uint16_t color, uint16_t x, uint16_t y);
+void printc_at(const char *c, uint16_t color, uint16_t x, uint16_t y);
 void prints(const char *s);
 void reset_screen(void);
 void new_line(void);
