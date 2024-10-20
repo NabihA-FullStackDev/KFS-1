@@ -47,7 +47,7 @@ void new_line()
     vga_state.column = 0;
 }
 
-void printc_att(const char *c, uint16_t color, uint16_t x, uint16_t y)
+void printc_at(const char *c, uint16_t color, uint16_t x, uint16_t y)
 {
     vga_state.vga[y * WIDTH + x] = *c | color;
 }
