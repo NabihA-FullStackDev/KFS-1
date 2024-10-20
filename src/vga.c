@@ -10,7 +10,7 @@ vga_t vga_state = {
 
 void change_colors(uint16_t txt, uint16_t bg)
 {
-    if (!(txt < 0 || txt > 16 || bg < 0 || bg > 16) && (txt != bg))
+    if (!(txt > 16 || bg > 16) && (txt != bg))
     {
         uint16_t color = (txt << 8) | (bg << 12);
         vga_state.current_color = color;

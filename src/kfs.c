@@ -1,18 +1,10 @@
+#include "includes/misc.h"
 #include "includes/vga.h"
 
-void kernel_main(void) {
-    reset_screen();
+void kernel_main(void)
+{
     change_colors(15, 0);
-    prints("\n");
-    prints("                                :::       ::::::::                               ");
-    prints("                              :+:       :+:    :+:                               ");
-    prints("                            +:+ +:+          +:+                                 ");
-    prints("                          +#+  +:+         +#+                                   ");
-    prints("                        +#+#+#+#+#+      +#+                                     ");
-    prints("                              #+#       #+#                                      ");
-    prints("                             ###      ##########                                 ");
-    prints("\n");
-    prints("\n");
+    fortytwo_header();
     change_colors(10, 0);
-    prints("42$> ");
+    prompt("42");
 }
