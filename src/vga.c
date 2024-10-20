@@ -25,7 +25,7 @@ void reset_screen()
     vga_state.column = 0;
     for (uint16_t y = 0; y < HEIGHT; y++)
         for (uint16_t x = 0; x <= WIDTH; x++)
-            printc_att(&c, vga_state.default_color, x, y);
+            printc_at(&c, vga_state.default_color, x, y);
 }
 
 void scroll_screen()
