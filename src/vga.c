@@ -23,19 +23,9 @@ void reset_screen()
 
     vga_state.line = 0;
     vga_state.column = 0;
-
-    while (vga_state.line < HEIGHT)
-    {
-        vga_state.column = 0;
-        while (vga_state.column <= WIDTH)
-        {
-            printc(&c, vga_state.default_color);
-            vga_state.column++;
-        }
-        vga_state.line++;
-    }
-    vga_state.line = 0;
-    vga_state.column = 0;
+    for (uint16_t y = 0; y < HEIGHT; y++)
+        for (uint16_t x = 0; x <= WIDTH; x++)
+            printc_att(&c, vga_state.default_color, x, y);
 }
 
 void scroll_screen()
@@ -55,6 +45,11 @@ void new_line()
     else
         vga_state.line++;
     vga_state.column = 0;
+}
+
+void printc_att(const char *c, uint16_t color, uint16_t x, uint16_t y)
+{
+    vga_state.vga[y * WIDTH + x] = *c | color;
 }
 
 void printc(const char *c, uint16_t color)
