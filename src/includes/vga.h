@@ -16,12 +16,12 @@
 #define DFT_TXT_COLOR WHITE
 
 void printc(const char *c, const uint16_t color);
-void printc_at(const char *c, uint16_t color, uint16_t x, uint16_t y);
+void printc_at(const char *c, const uint16_t color, const uint16_t x, const uint16_t y);
 void prints(const char *s);
 void reset_screen(void);
 void new_line(void);
 void scroll_screen(void);
-void change_colors(uint16_t txt, uint16_t bg);
+void change_colors(const uint16_t txt, const uint16_t bg);
 
 typedef struct vga_s {
     uint16_t column;

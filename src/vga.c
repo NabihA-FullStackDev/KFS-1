@@ -8,7 +8,7 @@ vga_t vga_state = {
     .current_color = (DFT_TXT_COLOR << 8) | (DFT_BG_COLOR << 12)
 };
 
-void change_colors(uint16_t txt, uint16_t bg)
+void change_colors(const uint16_t txt, const uint16_t bg)
 {
     if (!(txt > 16 || bg > 16) && (txt != bg))
     {
@@ -47,7 +47,7 @@ void new_line()
     vga_state.column = 0;
 }
 
-void printc_at(const char *c, uint16_t color, uint16_t x, uint16_t y)
+void printc_at(const char *c, uint16_t color, const uint16_t x, const uint16_t y)
 {
     vga_state.vga[y * WIDTH + x] = *c | color;
 }
