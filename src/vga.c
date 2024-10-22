@@ -30,12 +30,14 @@ void reset_screen()
 
 void scroll_screen()
 {
+    char c = ' ';
     for (uint16_t y = 0; y < HEIGHT; y++)
         for (uint16_t x = 0; x <= WIDTH ; x++)
             vga_state.vga[y * WIDTH + x] = vga_state.vga[(y + 1) * WIDTH + x];
 
     for (uint16_t x = 0; x <= WIDTH; x++)
-        vga_state.vga[(HEIGHT - 1) * WIDTH + x] = ' ' | vga_state.current_color;
+	printc_at(&c, vga_state.current_color, x, HEIGHT - 1);
+//        vga_state.vga[(HEIGHT - 1) * WIDTH + x] = ' ' | vga_state.current_color;
 }
 
 void new_line()

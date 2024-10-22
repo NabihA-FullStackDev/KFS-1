@@ -1,11 +1,6 @@
 BITS 32
 align 4
 
-; Ajout demander par le linker
-; pour le moment ceci n'est qu'un warning
-; mais pourra engendrer des probleme de compatibilite.
-section .note.GNU-stack noalloc noexec nowrite progbits
-
 section .text
 multiboot_header:
     DD 0x1BADB002
