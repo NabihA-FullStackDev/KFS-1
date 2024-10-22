@@ -1,8 +1,3 @@
-/*
-** Le fichier de linkage permet principalement
-** l'organisation la mémoire.
-*/
-
 OUTPUT_FORMAT(elf32-i386)
 ENTRY(start)
 
